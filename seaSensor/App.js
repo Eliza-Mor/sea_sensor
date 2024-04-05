@@ -40,23 +40,53 @@ export default function App() {
         </LinearGradient>
       </View>
 
-      <TouchableOpacity onPress={() => console.log("Botón presionado")} style={[tw`absolute`, { bottom: windowHeight / 4, left: 180, right: 180 }]}>
-  <View style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', backgroundColor: '#90E2F5' }]}>
-    <FontAwesomeIcon icon={faArrowUp} size={40} color="black"/>
-
+      <TouchableOpacity 
+  onPressIn={() => {
+    console.log("Inicio de la lectura de datos");
+  }}
+  onPressOut={() => {
+    console.log("Fin de la lectura de datos");
+  }}
+  style={[tw`absolute`, { bottom: windowHeight / 4, left: 180, right: 180 }]}
+>
+  <View 
+    style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', backgroundColor: '#90E2F5' }]}
+  >
+    <FontAwesomeIcon icon={faArrowUp} size={50} color="#DBA41A"/>
   </View>
 </TouchableOpacity>
 
-<TouchableOpacity onPress={() => console.log("Botón presionado")} style={[tw`absolute`, { bottom: windowHeight / 7, left: 180, right: 180 }]}>
-  <View style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', right: '150%', backgroundColor: '#90E2F5' }]}>
-    <FontAwesomeIcon icon={faArrowLeft} size={40} color="black"/>
 
+<TouchableOpacity 
+  onPressIn={() => {
+    console.log("Inicio de la lectura de datos");
+  }}
+  onPressOut={() => {
+    console.log("Fin de la lectura de datos");
+  }}
+  style={[tw`absolute`, { bottom: windowHeight / 7, left: 180, right: 180 }]}
+>
+  <View 
+    style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', right: '160%', backgroundColor: '#90E2F5' }]}
+  >
+    <FontAwesomeIcon icon={faArrowLeft} size={50} color="#DBA41A"/>
   </View>
 </TouchableOpacity>
 
-<TouchableOpacity onPress={() => console.log("Botón presionado")} style={[tw`absolute`, { bottom: windowHeight / 7, left: 180, right: 180 }]}>
-  <View style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', left: '150%', backgroundColor: '#90E2F5' }]}>
-    <FontAwesomeIcon icon={faArrowRight} size={40} color="black"/>
+
+<TouchableOpacity 
+  onPressIn={() => {
+    console.log("Inicio de la lectura de datos");
+  }}
+  onPressOut={() => {
+    console.log("Fin de la lectura de datos");
+  }}
+  style={[tw`absolute`, { bottom: windowHeight / 7, left: 180, right: 180 }]}
+>
+  <View 
+    style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', left: '160%', backgroundColor: '#90E2F5' }]}
+  >
+    <FontAwesomeIcon icon={faArrowRight} size={50} color="#DBA41A"/>
   </View>
 </TouchableOpacity>
       </LinearGradient>
