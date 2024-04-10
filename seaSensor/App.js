@@ -16,10 +16,10 @@ export default function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/sensores');
-        const data = response.data;
-        // Actualiza los estados locales con los datos recibidos
+      //try {
+        const response = await axios.get('http://192.168.16.185:3000/sensores').then(response => {
+          let data = response.data;
+                  // Actualiza los estados locales con los datos recibidos
         if (data.length > 0) {
           const { pH, temperature } = data[0];
           setPH(pH.toString());
@@ -27,9 +27,15 @@ export default function App() {
         } else {
           console.warn('La respuesta no contiene datos válidos.');
         }
-      } catch (error) {
-        console.error('Error fetching sensor data:', error);
-      }
+        
+        }).catch(error => {
+          console.log('Error al obtener los datos de sensores:', error);
+          console.error('Error fetching sensor data:', error);
+        });
+        
+      //} catch (error) {
+        //console.error('Error fetching sensor data:', error);
+      //}
     };
   
     fetchData();

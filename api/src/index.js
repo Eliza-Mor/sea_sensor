@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
+var app = express();
+var cors = require('cors');
+app.use(cors());
 
 // Conexión a la base de datos MongoDB Atlas
 const mongoUri = 'mongodb+srv://admin:2822004@ioty.ikxu0cy.mongodb.net/iot';
