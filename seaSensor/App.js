@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text,TouchableOpacity, View, ImageBackground, Dimensions } from 'react-native';
+import { Text,TouchableOpacity, View, ImageBackground, Dimensions,Button } from 'react-native';
 import tw from 'twrnc';
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +12,30 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 export default function App() {
   const windowHeight = Dimensions.get('window').height;
 
+  
 
+
+const handlePress = async () => {
+  const controller = new AbortController();
+  const { signal } = controller;
+
+  setTimeout(() => controller.abort(), 20000);
+
+  try {
+    const response = await fetch('http://192.168.16.185:9001/servo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ position: '90' }),
+      signal,
+    });
+    }
+
+  catch (error) {
+    console.error('Error al mover el servomotor:', error);
+  }
+};
   return (
     <View style={tw`flex-1`}>
       
@@ -40,21 +65,7 @@ export default function App() {
         </LinearGradient>
       </View>
 
-      <TouchableOpacity 
-  onPressIn={() => {
-    console.log("Inicio de la lectura de datos");
-  }}
-  onPressOut={() => {
-    console.log("Fin de la lectura de datos");
-  }}
-  style={[tw`absolute`, { bottom: windowHeight / 4, left: 180, right: 180 }]}
->
-  <View 
-    style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', backgroundColor: '#90E2F5' }]}
-  >
-    <FontAwesomeIcon icon={faArrowUp} size={50} color="#DBA41A"/>
-  </View>
-</TouchableOpacity>
+      <Button title="Mover servomotor a 90 grados" onPress={handlePress} />
 
 
 <TouchableOpacity 
