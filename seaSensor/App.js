@@ -5,7 +5,10 @@ import tw from 'twrnc';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faArrowRight, faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+//import axios from 'axios';
+import io from 'socket.io-client';
+
+const socket = io('http://10.10.50.188:3000'); // Reemplaza con la IP de tu servidor
 
 
 export default function App() {
@@ -15,31 +18,17 @@ export default function App() {
   const [temperature, setTemperature] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      //try {
-        const response = await axios.get('http://192.168.16.185:3000/sensores').then(response => {
-          let data = response.data;
-                  // Actualiza los estados locales con los datos recibidos
-        if (data.length > 0) {
-          const { pH, temperature } = data[0];
-          setPH(pH.toString());
-          setTemperature(temperature.toString());
-        } else {
-          console.warn('La respuesta no contiene datos válidos.');
-        }
-        
-        }).catch(error => {
-          console.log('Error al obtener los datos de sensores:', error);
-          console.error('Error fetching sensor data:', error);
-        });
-        
-      //} catch (error) {
-        //console.error('Error fetching sensor data:', error);
-      //}
+    // Escuchar actualizaciones de sensor desde el servidor
+    socket.on('sensorDataUpdate', (data) => {
+        const { pH, temperature } = data;
+        setPH(pH.toFixed(2)); // Actualizar estado local con los nuevos datos
+        setTemperature(temperature.toFixed(2));
+    });
+
+    return () => {
+        socket.disconnect(); // Desconectar el socket al desmontar el componente
     };
-  
-    fetchData();
-  }, []);
+}, []); // Se ejecuta solo una vez al montar el componente
 
 
   return (

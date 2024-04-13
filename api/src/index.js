@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-var app = express();
-var cors = require('cors');
+const app = express();
+const cors = require('cors');
+const http = require('http').Server(app);
+const io = require('socket.io')(http); // Integrar socket.io con el servidor
+
 app.use(cors());
 
 // Conexión a la base de datos MongoDB Atlas
@@ -37,8 +40,30 @@ app.get('/sensores', async (req, res) => {
     }
 });
 
-// Iniciar el servidor
-const PORT = process.env.PORT || 3000; // Utilizar el puerto definido por el entorno o 3000 por defecto
-app.listen(PORT, () => {
-    console.log(`Servidor de API RESTful en ejecución en http://localhost:${PORT}`);
+const updateSensorData = (newData) => {
+    io.emit('sensorDataUpdate', newData); // Emitir actualizaciones a todos los clientes conectados
+};
+
+// Simular actualizaciones periódicas (reemplazar con la lógica real de Arduino)
+setInterval(async () => {
+    try {
+        const newData = { pH: Math.random() * 14, temperature: Math.random() * 100 };
+        // Guardar los nuevos datos en la base de datos
+        await Sensor.updateOne({}, newData); // Aquí debes implementar la lógica real para actualizar la base de datos
+        updateSensorData(newData); // Emitir los nuevos datos a través de Socket.IO
+    } catch (error) {
+        console.error('Error al actualizar los datos del sensor:', error);
+    }
+}, 3000); // Intervalo de actualización (cada 5 segundos)
+
+
+// Configurar socket.io para escuchar conexiones
+io.on('connection', (socket) => {
+    console.log('Cliente conectado');
 });
+
+// Conexión HTTP del servidor
+const PORT = process.env.PORT || 3000;
+http.listen(PORT, () => {
+    console.log(`Servidor de API RESTful y Socket.IO en ejecución en http://localhost:${PORT}`);
+})
