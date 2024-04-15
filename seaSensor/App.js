@@ -47,12 +47,12 @@ export default function App() {
   onPressOut={() => {
     console.log("Fin de la lectura de datos");
   }}
-  style={[tw`absolute`, { bottom: windowHeight / 4, left: 180, right: 180 }]}
+  style={[tw`absolute`, { bottom: windowHeight / 4, left: 150, right: 165 }]}
 >
   <View 
-    style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', backgroundColor: '#90E2F5' }]}
+    style={[tw`bg-white p-4 rounded-lg shadow-md h-15 flex items-center justify-center`, { width: '150%', backgroundColor: '#90E2F5' }]}
   >
-    <FontAwesomeIcon icon={faArrowUp} size={50} color="#DBA41A"/>
+    <FontAwesomeIcon icon={faArrowUp} size={40} color="#DBA41A"/>
   </View>
 </TouchableOpacity>
 
@@ -64,12 +64,12 @@ export default function App() {
   onPressOut={() => {
     console.log("Fin de la lectura de datos");
   }}
-  style={[tw`absolute`, { bottom: windowHeight / 7, left: 180, right: 180 }]}
+  style={[tw`absolute`, { bottom: windowHeight / 7, left: 145, right: 170 }]}
 >
   <View 
-    style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', right: '160%', backgroundColor: '#90E2F5' }]}
+    style={[tw`bg-white p-4 rounded-lg shadow-md h-15 flex items-center justify-center`, { width: '155%', right: '155%', backgroundColor: '#90E2F5' }]}
   >
-    <FontAwesomeIcon icon={faArrowLeft} size={50} color="#DBA41A"/>
+    <FontAwesomeIcon icon={faArrowLeft} size={40} color="#DBA41A"/>
   </View>
 </TouchableOpacity>
 
@@ -81,12 +81,12 @@ export default function App() {
   onPressOut={() => {
     console.log("Fin de la lectura de datos");
   }}
-  style={[tw`absolute`, { bottom: windowHeight / 7, left: 180, right: 180 }]}
+  style={[tw`absolute`, { bottom: windowHeight / 7, left: 150, right: 165 }]}
 >
   <View 
-    style={[tw`bg-white p-4 rounded-lg shadow-md h-20 flex items-center justify-center`, { width: '150%', left: '160%', backgroundColor: '#90E2F5' }]}
+    style={[tw`bg-white p-4 rounded-lg shadow-md h-15 flex items-center justify-center`, { width: '150%', left: '155%', backgroundColor: '#90E2F5' }]}
   >
-    <FontAwesomeIcon icon={faArrowRight} size={50} color="#DBA41A"/>
+    <FontAwesomeIcon icon={faArrowRight} size={40} color="#DBA41A"/>
   </View>
 </TouchableOpacity>
       </LinearGradient>
